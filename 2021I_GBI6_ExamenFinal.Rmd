@@ -138,8 +138,17 @@ Para esta pregunta tiene que utilizar la data ```df_long```.
 ### [1 PUNTO] 2.1 Cree la funcion ```tcga_boxplots``` para visualizar boxplots y jitterplots. El único parámetro de la función es ```dataset```. La función debe crear un boxplot de los niveles de expresión para cada gen.
 
 ```{r}
-# Escriba el código para crear la función tcga_boxplots
-
+# Crear la función tcga_boxplots
+library("ggplot2")
+tcga_boxplots<- function (data) {
+  grafica=ggplot(data ,aes(gen,expresion_level)) +
+    geom_boxplot() + geom_jitter(alpha=0.2, size = 0.2)+
+    labs(x = "Genes",y = "Nivel de expresion",title="Nivel de expresion oncogenes")+
+    theme(plot.title = element_text(hjust = 0.5, size = 18, face = "bold"))
+    return(grafica)
+}
+#Generar el grafico
+tcga_boxplots(df_long)
 
 ```
 

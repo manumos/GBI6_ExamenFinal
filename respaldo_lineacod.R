@@ -14,4 +14,20 @@ long_df <- function(a,b,c,d,e) {
   return(y)
 }
 #pregunta 1.4
-df_long <- long_df(df,"bcr_patient_barcode","dataset","gen","expresion_level") %>% select(dataset,gen,expresion_level)
+df_long <- long_df(df,"bcr_patient_barcode","dataset","gen","expresion_level") %>% select(!(bcr_patient_barcode))
+
+#pregunta 1.5
+library("sjPlot")
+#pregutna 1.6
+
+#pregunta 2.1
+library("ggplot2")
+tcga_boxplots<- function (data) {
+  grafica=ggplot(data ,aes(gen,expresion_level)) +
+    geom_boxplot() + geom_jitter(alpha=0.2, size = 0.2)+
+    labs(x = "Genes",y = "Nivel de expresion",title="Nivel de expresion oncogenes")+
+    theme(plot.title = element_text(hjust = 0.5, size = 18, face = "bold"))
+    return(grafica)
+}
+tcga_boxplots(df_long)
+#pregunta 2.2

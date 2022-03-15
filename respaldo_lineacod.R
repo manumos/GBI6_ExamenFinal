@@ -23,16 +23,16 @@ library("sjPlot")
 #pregunta 2.1
 library("ggplot2")
 tcga_boxplots<- function (x) {
-  grafica=ggplot(df_long ,aes(df_long(sample(c(df_long[df_long$dataset == x,])),expresion_level)) +
+    st<-df_long[df_long$dataset==x,]
+    grafica=ggplot(st,aes(dataset,expresion_level)) +
     geom_boxplot() + geom_jitter(alpha=0.2, size = 0.2)+
-    labs(x = "Tipo de cancer",y = "Nivel de expresion",title="Nivel de expresion")+
+    labs(x = "Genes",y = "Nivel de expresion",title="Nivel de expresion tipos de cancer")+
     theme(plot.title = element_text(hjust = 0.5, size = 18, face = "bold"))
     return(grafica)
 }
 
-#prueba
-tcga_boxplots("BRCA")
-
-#sets<-c('BCRA','KIPAN','KIPR','LUSC','OV','UCEC')
+tcga_boxplots('KIPAN')
+sets<-c('BCRA','KIPAN','KIPR','LUSC','OV','UCEC')
 #pregunta 2.2
-
+              
+              

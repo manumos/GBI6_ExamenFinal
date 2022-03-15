@@ -107,7 +107,11 @@ long_df <- function(a,b,c,d,e) {
 ### [1 PUNTO] 1.4. Genere la data ```df_long``` utilizandola función ```long_df```. 
 La tabla resultante tendrá tres columnas: ```dataset, gen, expresion_level```.  
 ```{r df_long}
-# Genere la data df_long 
+#importar libreria
+library("tidyverse")
+
+# Genere la data df_long con la funcion creada y seleccionar las columnas de interes
+df_long <- long_df(df,"bcr_patient_barcode","dataset","gen","expresion_level") %>% select(!(bcr_patient_barcode))
 
 ```
 

@@ -30,9 +30,10 @@ tcga_boxplots<- function (x) {
     theme(plot.title = element_text(hjust = 0.5, size = 18, face = "bold"))
     return(grafica)
 }
-
+#prueba
 tcga_boxplots('KIPAN')
-sets<-c('BCRA','KIPAN','KIPR','LUSC','OV','UCEC')
+
 #pregunta 2.2
-              
+sets<-c('BCRA','KIPAN','KIPR','LUSC','OV','UCEC')
+cancertype_boxplots<-lapply(sets,tcga_boxplots)             
               

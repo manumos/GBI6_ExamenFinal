@@ -1682,19 +1682,28 @@ análisis se han seleccionado solamente 7 de ellos).</p></li>
 </div>
 <div id="puntos-1.2.-cargue-la-data-mrna_expr.csv" class="section level3">
 <h3>[0.5 PUNTOS] 1.2. Cargue la data “mRNA_expr.csv”</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.mrna <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/mRNA_expr.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/mRNA_expr.csv&quot;</span>)</span></code></pre></div>
 </div>
-<div id="punto-1.3-cree-una-función-de-nombre-long_df-para-transformar-la-data-df-de-la-forma-wide-a-long." class="section level3">
-<h3>[1 PUNTO] 1.3 Cree una función de nombre <code>long_df</code> para
+<div id="punto-1.3.-cree-una-función-de-nombre-long_df-para-transformar-la-data-df-de-la-forma-wide-a-long." class="section level3">
+<h3>[1 PUNTO] 1.3. Cree una función de nombre <code>long_df</code> para
 transformar la data <code>df</code> de la forma wide a long.</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escriba aquí la función long_df</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#importar libreria</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;tidyr&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: package &#39;tidyr&#39; was built under R version 4.1.3</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#definir funcion</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#a=data frame, b y c=dos primeras columnas , d y e=nombres de las variables</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>long_df <span class="ot">&lt;-</span> <span class="cf">function</span>(a,b,c,d,e) {</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  y<span class="ot">=</span>a <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="sc">!</span><span class="fu">c</span>(b,c),<span class="at">names_to =</span>d, <span class="at">values_to =</span> e)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(y)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
-<div id="punto-genere-la-data-df_long-utilizandola-función-long_df." class="section level3">
-<h3>[1 PUNTO] Genere la data <code>df_long</code> utilizandola función
-<code>long_df</code>.</h3>
+<div id="punto-1.4.-genere-la-data-df_long-utilizandola-función-long_df." class="section level3">
+<h3>[1 PUNTO] 1.4. Genere la data <code>df_long</code> utilizandola
+función <code>long_df</code>.</h3>
 <p>La tabla resultante tendrá tres columnas:
 <code>dataset, gen, expresion_level</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Genere la data df_long </span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Genere la data df_long </span></span></code></pre></div>
 </div>
 <div id="puntos-1.5-a-partir-de-la-data-df_long-genere-un-descriptive-table-librería-sjplot-y-guárdelo-en-el-subdirectorio-result-con-el-nombre-mrna_expr_summary.doc-previamente-debe-seleccionar-las-celdas-adecuadas-con-funciones-de-la-librería-dplyr-en-conjunto-con-el-operador-." class="section level3">
 <h3>[0.5 PUNTOS] 1.5 A partir de la data <code>df_long</code>, genere un
@@ -1703,12 +1712,12 @@ guárdelo en el subdirectorio “result” con el nombre
 <strong>mRNA_expr_summary.doc</strong> (previamente debe seleccionar las
 celdas adecuadas con funciones de la librería <code>dplyr</code> en
 conjunto con el operador <code>%&gt;%</code>).</h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escriba el código para crear el Descriptive table </span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escriba el código para crear el Descriptive table </span></span></code></pre></div>
 </div>
 <div id="puntos-1.6-interprete-los-resultados-de-la-tabla-resultante-de-la-sección-1.5." class="section level3">
 <h3>[0.5 PUNTOS] 1.6 Interprete los resultados de la tabla resultante de
 la sección 1.5.</h3>
-<div class="sourceCode" id="cb8"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a># Escriba aquí su interpretación </span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a># Escriba aquí su interpretación </span></code></pre></div>
 </div>
 </div>
 <div id="pregunta-2-visualizacion-de-datos-5-puntos" class="section level2">
@@ -1720,20 +1729,20 @@ la sección 1.5.</h3>
 visualizar boxplots y jitterplots. El único parámetro de la función es
 <code>dataset</code>. La función debe crear un boxplot de los niveles de
 expresión para cada gen.</h3>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escriba el código para crear la función tcga_boxplots</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escriba el código para crear la función tcga_boxplots</span></span></code></pre></div>
 </div>
 <div id="puntos-2.2-utilizando-la-función-lapply-genera-la-lista-cancertype_boxplots-con-las-gráficas-para-cada-tipo-de-cancer-cada-tipo-de-dataset." class="section level3">
 <h3>[0.5 PUNTOS] 2.2 Utilizando la función <code>lapply()</code> genera
 la lista <code>cancertype_boxplots</code> con las gráficas para cada
 tipo de cancer (cada tipo de dataset).</h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escriba el código para generar la lista. </span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escriba el código para generar la lista. </span></span></code></pre></div>
 </div>
 <div id="puntos-2.3-guarde-en-el-subdirectorio-result-el-tercer-plot-de-la-lista-cancertype_boxplots-con-el-nombre-boxplot3.png.-la-definición-de-a-figura-debe-ser-de-300dpi." class="section level3">
 <h3>[0.5 PUNTOS] 2.3 Guarde en el subdirectorio <code>result</code> el
 tercer plot de la lista <code>cancertype_boxplots</code> con el nombre
 <code>boxplot3.png</code>. La definición de a figura debe ser de
 300dpi.</h3>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escriba el código para guardar la tercera figura de la lista. </span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escriba el código para guardar la tercera figura de la lista. </span></span></code></pre></div>
 </div>
 <div id="punto-2.4-escriba-la-función-reg_gen_expression-con-el-parámetro-gen.-en-este-caso-la-función-visualizará-una-gráfica-de-nube-de-puntos-geom_point-y-una-regresión-por-tipo-de-dataset.-la-gráfica-será-de-comparación-de-gen1-con-gen2-por-ejemplo-en-el-eje-x-gata3-y-en-el-eje-y-fn1." class="section level3">
 <h3>[1 PUNTO] 2.4 Escriba la función <code>reg_gen_expression</code>,
@@ -1741,7 +1750,7 @@ con el parámetro <code>gen</code>. En este caso la función visualizará
 una gráfica de nube de puntos (geom_point) y una regresión por tipo de
 “dataset”. La gráfica será de comparación de gen1 con gen2; por ejemplo
 en el eje “x” <code>GATA3</code> y en el eje “y”” <code>FN1</code>.</h3>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escriba aquí su función reg_gen_expression</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escriba aquí su función reg_gen_expression</span></span></code></pre></div>
 </div>
 <div id="puntos-2.5.-utilizando-la-función-lapply-genera-la-lista-reg_genplots-con-las-gráficas-para-cada-par-de-genes-posibles.-recuerde-que-tiene-7-tipos-de-genes-se-debe-tener-todas-las-combinaciones-posibles-por-pares-de-genes-combinatoria-sin-repetición." class="section level3">
 <h3>[0.5 PUNTOS] 2.5. Utilizando la función <code>lapply()</code> genera
@@ -1749,19 +1758,19 @@ la lista <code>reg_genplots</code> con las gráficas para cada par de
 genes posibles. Recuerde que tiene 7 tipos de genes, se debe tener todas
 las combinaciones posibles por pares de genes (combinatoria sin
 repetición).</h3>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escriba el código para generar la lista. </span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escriba el código para generar la lista. </span></span></code></pre></div>
 </div>
 <div id="puntos-2.6.-guarde-en-el-subdirectorio-result-el-onceavo-plot-de-la-lista-reg_genplots-con-el-nombre-regresion11.pdf.-la-definición-de-a-figura-debe-ser-de-300dpi." class="section level3">
 <h3>[0.5 PUNTOS] 2.6. Guarde en el subdirectorio <code>result</code> el
 onceavo plot de la lista <code>reg_genplots</code> con el nombre
 <code>regresion11.pdf</code>. La definición de a figura debe ser de
 300dpi.</h3>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escriba el código para guardar el onceavo plot. </span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Escriba el código para guardar el onceavo plot. </span></span></code></pre></div>
 </div>
 <div id="punto-2.7.-interprete-los-resultados-de-las-figuras-boxplot3.png-y-regresion11.pdf." class="section level3">
 <h3>[1 PUNTO] 2.7. Interprete los resultados de las figuras
 <code>boxplot3.png</code> y <code>regresion11.pdf</code>.</h3>
-<div class="sourceCode" id="cb15"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a># Esciba aquí su intepretación</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode tex"><code class="sourceCode latex"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a># Esciba aquí su intepretación</span></code></pre></div>
 </div>
 </div>
 <div id="control-de-la-versión-1-punto.-se-verficará-en-ell-repositorio-de-github." class="section level2">

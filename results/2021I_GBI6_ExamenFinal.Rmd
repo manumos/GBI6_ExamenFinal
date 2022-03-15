@@ -77,7 +77,8 @@ Para comprender la data de esta evaluación se requiere conocer el significado d
 
 ### [0.5 PUNTOS] 1.1 Defina su directorio de trabajo. 
 ```{r wd}
-
+getwd() #comprobar directorio actual
+setwd("/Users/Manuela/Documents/GitHub/GBI6_ExamenFinal/results")#definir directorio actual
 ```
 
 ### [0.5 PUNTOS] 1.2. Cargue la data "mRNA_expr.csv"

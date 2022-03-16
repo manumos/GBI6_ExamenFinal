@@ -17,7 +17,10 @@ long_df <- function(a,b,c,d,e) {
 df_long <- long_df(df,"bcr_patient_barcode","dataset","gen","expresion_level") %>% select(!(bcr_patient_barcode))
 
 #pregunta 1.5
-library("sjPlot")
+library(dplyr)
+df_long %>%
+  group_by(dataset,gen)%>%
+  descr(out="viewer",file="results/mRNA_expr_summary.doc")
 #pregutna 1.6
 
 #pregunta 2.1
@@ -34,6 +37,19 @@ tcga_boxplots<- function (x) {
 tcga_boxplots('KIPAN')
 
 #pregunta 2.2
-sets<-c('BCRA','KIPAN','KIPR','LUSC','OV','UCEC')
-cancertype_boxplots<-lapply(sets,tcga_boxplots)             
+sets<-c('BRCA','KIPAN','KIRP','LUSC','OV','UCEC')
+cancertype_boxplots<-lapply(sets,tcga_boxplots)  
+cancertype_boxplots[3]
+
+#pregunta 2.3
+KIRP_plot<-cancertype_boxplots[3]
+plot.new()
+KIRP_plot
+ggsave("boxplot3.png",plot=KIRP_plot,device="png",path="results",width=10, height=10)
+
+#pregunta 2.4
+reg_gen_expression<- function(a,b) {
+  puntos=ggplot(data=df,aes(x=factor(a),y=factor(b)))+geom_point()
+  return(puntos)
+}
               

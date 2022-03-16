@@ -117,7 +117,12 @@ df_long <- long_df(df,"bcr_patient_barcode","dataset","gen","expresion_level") %
 
 ### [0.5 PUNTOS] 1.5 A partir de la data ```df_long```, genere un **Descriptive table** (librería ```sjPlot```) y guárdelo en el subdirectorio "result"  con el nombre **mRNA_expr_summary.doc** (previamente debe seleccionar las celdas adecuadas con funciones de la librería ```dplyr``` en conjunto con el operador ```%>%```). 
 ```{r desc_table}
-# Escriba el código para crear el Descriptive table 
+library(sjmisc)
+library(sjPlot)
+library(dplyr)
+df_long %>%
+  group_by(dataset,gen)%>%
+  descr(out="viewer",file="results/mRNA_expr_summary.doc")
 
 ```
 
@@ -152,7 +157,7 @@ tcga_boxplots<- function (x) {
 
 ### [0.5 PUNTOS] 2.2 Utilizando la función ```lapply()``` genera la lista ```cancertype_boxplots``` con las gráficas para cada tipo de cancer (cada tipo de dataset). 
 ```{r list_boxplots}
-sets<-c('BCRA','KIPAN','KIPR','LUSC','OV','UCEC')
+sets<-c('BRCA','KIPAN','KIRP','LUSC','OV','UCEC')
 cancertype_boxplots<-lapply(sets,tcga_boxplots)  
 ```
 
@@ -168,7 +173,6 @@ cancertype_boxplots<-lapply(sets,tcga_boxplots)
 
 ```{r reg_gen_exp}
 # Escriba aquí su función reg_gen_expression
-
 
 ```
 

@@ -147,8 +147,8 @@ library("ggplot2")
 tcga_boxplots<- function (x) {
     st<-df_long[df_long$dataset==x,]
     grafica=ggplot(st,aes(dataset,expresion_level)) +
-    geom_boxplot() + geom_jitter(alpha=0.2, size = 0.2)+
-    labs(x = "Genes",y = "Nivel de expresion",title="Nivel de expresion tipos de cancer")+
+    geom_boxplot() + geom_jitter()+
+    labs(x = "Tipo de cancer",y = "Expresion",title="Nivel de expresion tipos de cancer")+
     theme(plot.title = element_text(hjust = 0.5, size = 18, face = "bold"))
     return(grafica)
 }
@@ -163,8 +163,8 @@ cancertype_boxplots<-lapply(sets,tcga_boxplots)
 
 ### [0.5 PUNTOS] 2.3 Guarde en el subdirectorio ```result``` el tercer plot de la lista ```cancertype_boxplots``` con el nombre ```boxplot3.png```. La definición de a figura debe ser de 300dpi. 
 ```{r boxplot3}
-# Escriba el código para guardar la tercera figura de la lista. 
-
+cancertype_boxplots[3]
+ggsave("boxplot3.png",device="png",path="results",width=20, height=20,units='cm',dpi = 300)
 
 ```
 

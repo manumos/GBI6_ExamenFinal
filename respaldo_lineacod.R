@@ -21,8 +21,8 @@ library(dplyr)
 df_long %>%
   group_by(dataset,gen)%>%
   descr(out="viewer",file="results/mRNA_expr_summary.doc")
-#pregutna 1.6
-
+#pregunta 1.6
+#interpretacion
 #pregunta 2.1
 library("ggplot2")
 tcga_boxplots<- function (x) {
@@ -52,4 +52,11 @@ reg_gen_expression<- function(a,b) {
   puntos=ggplot(data=df,aes(x=factor(a),y=factor(b)))+geom_point()
   return(puntos)
 }
-              
+         
+#pregunta 2.5
+genes<- c('GATA3','PTEN','XBP1','ESR1','MUC1','FN1','GAPDH')
+doble_genes<-combn(genes,m=2,simplify=F)
+reg_genplots<-lapply(doble_genes,reg_gen_expression)
+
+#pregunta 2.6
+#pregunta 2.7

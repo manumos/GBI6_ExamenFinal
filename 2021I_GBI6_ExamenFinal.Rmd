@@ -130,8 +130,15 @@ df_long %>%
 
 
 ```{tex}
-En las tablas resultantes se puede apreciar un resumen estadistico de cada elemento, agrupado de acuerdo a el tipo de cancer y el nivel de expresion de cada gen. 
-Se puede visualizar> varibale, tipo, numero de datos o muestras, la media, la moda , el rango, ademas de las desviacion tipica y el error estandar. Si analizaramos a profundidad cada tabla podriamos comprender la forma en la que se comportan estos datos.
+En las tablas resultantes se puede apreciar un resumen
+estadistico de cada elemento, agrupado de acuerdo a el
+tipo de cancer y el nivel de expresion de cada gen. 
+Se puede visualizar> varibale, tipo, numero de datos
+o muestras, la media, la moda , el rango, ademas de
+las desviacion tipica y el error estandar. 
+Si analizaramos a profundidad cada tabla 
+podriamos comprender la forma en 
+la que se comportan estos datos.
 ```
 
 
@@ -182,23 +189,72 @@ reg_gen_expression<-function(gen1,gen2){
 
 ### [0.5 PUNTOS] 2.5. Utilizando la función ```lapply()``` genera la lista ```reg_genplots``` con las gráficas para cada par de genes posibles. Recuerde que tiene 7 tipos de genes, se debe tener todas las combinaciones posibles por pares de genes (combinatoria sin repetición).
 ```{r list_regplots}
-genes<- c('GATA3','PTEN','XBP1','ESR1','MUC1','FN1','GAPDH')
+#la funcion deberia verse de esta forma
+
 #reg_genplots<-reg_gen_expression %>%lapply(c(genes))
+
+#ESTE ES EL ERROR QUE ME SALE ya sea que ponga 
+#los argumentos con o sin comillas 
+
+#Error in FUN(X[[i]], ...) : object 'GATA3' not found   
+
+#No se como hacer los pares directamente sin espacio y con una coma
+#en medio apra que puedan entrar como argumento de la funcion,
+#y ademas q estos no sean en forma string para que la funcion
+#los pueda detectar como elementos del dataframe.
+
+
+
+
+
+
+
 ```
 
 
 ### [0.5 PUNTOS] 2.6. Guarde en el subdirectorio ```result``` el onceavo plot de la lista ```reg_genplots``` con el nombre ```regresion11.pdf```. La definición de a figura debe ser de 300dpi. 
 ```{r reg11}
-# Escriba el código para guardar el onceavo plot. 
-#reg_genplots[11]
-#ggsave("regresion11.pdf",device="pdf",path="results",width=20, #height=20,units='cm',dpi = 300)
+genes<- c('GATA3','PTEN','XBP1','ESR1','MUC1','FN1','GAPDH')
+pares<-combn(genes,m=2,simplify=F)
+pares[11]
+
+ggplot(df,aes(PTEN,GAPDH))+geom_point()+geom_smooth(method='lm', formula= y~x)
+ggsave("regresion11.png",device="png",path="results",width=20,height=20,units='cm',dpi = 300)
+#la funcion knit no me permite ejecutar este bloque con formato pdf
+#lo cambie a png y guarde desde la consola en el formato pdf
+#ambos resultados estan en la carpeta
 ```
 
 
 ### [1 PUNTO] 2.7. Interprete los resultados de las figuras ```boxplot3.png``` y ```regresion11.pdf```.
 
 ```{tex}
-En la figura del boxplot se puede observar el nivel del expresion para el tipo de cancer con codigo KIPR o sea el Carcinoma renal de células papilares. S epuede observar que la expresion oscila entre valores de -1 y -3 aproximadamente por lo cual seria factible decir que la expresion de este gen no se asocia a este tipo de cancer, pero tal vez si su silenciamiento, lo cual yo interpreto como la subexpresion. 
+En la figura del boxplot se puede observar el nivel del expresion para el tipo de cancer con codigo KIPR
+o sea el Carcinoma renal de células papilares. S epuede observar que la expresion oscila entre valores
+de -1 y -3 aproximadamente por lo cual seria factible decir que la expresion de este gen no se asocia
+a este tipo de cancer,pero tal vez si su silenciamiento, lo cual yo interpreto como la subexpresion. 
+En cuanto a la figura 11, en mi caso realize un plot con los genes correspondientes y su nivel de expresion,
+cada punto corresponde a un paciente, su posicion en el recuadro viene dada por el nivel de expresion
+de cada uno. Se observa que para el gen PTEN la mayoria de puntos su ubican entre los niveles 0 y 1 de expresion,
+mientras que para el gen GAPDH, se observa una mayor incidencia entre 0 y -2. Por lo cual existe una relacion
+inversamente proporcional, entre la expresion de ambos genes tal como se expresa en la linea de tendencia. 
+
+
+#OTROS COMENTARIOS
+Ralizé de varias formas la funcion reg_gen_expression pero obtenia varios errores, principalmente por que
+no sabia como pasar el nombre de la varible dentro del argumento aes() del ggplot, esto debido a que al
+ingresarla de forma automatica a traves de un bucle for o de otras maneras que intente, incluso
+cambiando a factor() y a dataframe no lo detectaba como parte de la data (df), por lo cual por razones de
+tiempo decidi ingresar manualmente lo datos para el plot solicitado.
+Adicional a ello, el
+ejericico pide una regresion lineal del tipo de cancer, sin embargo no me fue posible combinar los dos
+graficos en un solo grafico, ademas de que al llamar a la he intentado resumir el dataframe para que
+se asocie los niveles de expresion de cada tipo de cancer con las funciones pivot_wider para
+ampliar la informacion sobre cada cancer, y no lo he logrado.
+Considero sin embargo,
+que al realizar una grafica de regresion sobre los puntos de expresion de 2 genes, resulta una buena
+herramienta de interpretacion que ayuda a  comprender los datos.
+
 ```
 
 ## 3. CONTROL DE LA VERSIÓN [1 PUNTO]. Se verficará en ell repositorio de GitHub. 

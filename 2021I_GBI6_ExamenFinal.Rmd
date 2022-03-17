@@ -130,8 +130,8 @@ df_long %>%
 
 
 ```{tex}
-# Escriba aquí su interpretación 
-
+En las tablas resultantes se puede apreciar un resumen estadistico de cada elemento, agrupado de acuerdo a el tipo de cancer y el nivel de expresion de cada gen. 
+Se puede visualizar> varibale, tipo, numero de datos o muestras, la media, la moda , el rango, ademas de las desviacion tipica y el error estandar. Si analizaramos a profundidad cada tabla podriamos comprender la forma en la que se comportan estos datos.
 ```
 
 
@@ -172,30 +172,33 @@ ggsave("boxplot3.png",device="png",path="results",width=20, height=20,units='cm'
 ### [1 PUNTO] 2.4 Escriba la función ```reg_gen_expression```, con el parámetro ```gen```. En este caso la función visualizará una gráfica de nube de puntos (geom_point) y una regresión por tipo de "dataset". La gráfica será de comparación de gen1 con gen2; por ejemplo en el eje "x" ```GATA3``` y en el eje "y"" ```FN1```.  
 
 ```{r reg_gen_exp}
-# Escriba aquí su función reg_gen_expression
+reg_gen_expression<-function(gen1,gen2){
+  fig=ggplot(df,aes(gen1,gen2))+geom_point()+geom_smooth(method='lm', formula= y~x)
+  return(fig)
+}
 
 ```
 
 
 ### [0.5 PUNTOS] 2.5. Utilizando la función ```lapply()``` genera la lista ```reg_genplots``` con las gráficas para cada par de genes posibles. Recuerde que tiene 7 tipos de genes, se debe tener todas las combinaciones posibles por pares de genes (combinatoria sin repetición).
 ```{r list_regplots}
-# Escriba el código para generar la lista. 
-
+genes<- c('GATA3','PTEN','XBP1','ESR1','MUC1','FN1','GAPDH')
+#reg_genplots<-reg_gen_expression %>%lapply(c(genes))
 ```
 
 
 ### [0.5 PUNTOS] 2.6. Guarde en el subdirectorio ```result``` el onceavo plot de la lista ```reg_genplots``` con el nombre ```regresion11.pdf```. La definición de a figura debe ser de 300dpi. 
 ```{r reg11}
 # Escriba el código para guardar el onceavo plot. 
-
+#reg_genplots[11]
+#ggsave("regresion11.pdf",device="pdf",path="results",width=20, #height=20,units='cm',dpi = 300)
 ```
 
 
 ### [1 PUNTO] 2.7. Interprete los resultados de las figuras ```boxplot3.png``` y ```regresion11.pdf```.
 
 ```{tex}
-# Esciba aquí su intepretación
-
+En la figura del boxplot se puede observar el nivel del expresion para el tipo de cancer con codigo KIPR o sea el Carcinoma renal de células papilares. S epuede observar que la expresion oscila entre valores de -1 y -3 aproximadamente por lo cual seria factible decir que la expresion de este gen no se asocia a este tipo de cancer, pero tal vez si su silenciamiento, lo cual yo interpreto como la subexpresion. 
 ```
 
 ## 3. CONTROL DE LA VERSIÓN [1 PUNTO]. Se verficará en ell repositorio de GitHub. 

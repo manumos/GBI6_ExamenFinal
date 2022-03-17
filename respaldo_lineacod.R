@@ -1,13 +1,11 @@
 #pregunta 1.1
 getwd() #comprobar directorio actual
 setwd("/Users/Manuela/Documents/GitHub/GBI6_ExamenFinal/")#definir directorio actual
+
 #pregunta 1.2
 df<- read.csv("data/mRNA_expr.csv")
-#pregunta 1.3
-install.packages("tidyverse") #instale tydiverse
-library("tidyverse")
-library("tidyr")
 
+#pregunta 1.3
 #definir funcion en base a un vector que contenga los argumentos
 long_df <- function(a,b,c,d,e) {
   y=a %>% pivot_longer(!c(b,c),names_to =d, values_to = e)
@@ -48,15 +46,31 @@ KIRP_plot
 ggsave("boxplot3.png",plot=KIRP_plot,device="png",path="results",width=10, height=10)
 
 #pregunta 2.4
-reg_gen_expression<- function(a,b) {
-  puntos=ggplot(data=df,aes(x=factor(a),y=factor(b)))+geom_point()
-  return(puntos)
-}
-         
-#pregunta 2.5
 genes<- c('GATA3','PTEN','XBP1','ESR1','MUC1','FN1','GAPDH')
-doble_genes<-combn(genes,m=2,simplify=F)
-reg_genplots<-lapply(doble_genes,reg_gen_expression)
+reg_gen_expression<- function(G) {
+  elem<-c(1:7)#lista del 1 al 7
+  pares<-combn(elem,m=2,simplify=F)# combinaciones posibles de 7 elementos
+  df_par<-data.frame(t(sapply(pares,c)))#dataframe de la combinaciones
+  fila<-c(1:21)#total combinaciones
+  for (i in fila){
+    a<-as.numeric(df_par$X1[i])
+    b<-as.numeric(df_par$X2[i])
+    gen1<-factor(G[a])
+    gen2<-factor(G[b])
+    gep<-ggplot(df)+geom_point(aes(gen1,gen2))
+  }
+  gep
+}
 
+
+reg_fun<- function (H){
+  figura=ggplot(df,aes(H[1],H[2]))+geom_point()
+  return(figura)
+}
+#pregunta 2.5
 #pregunta 2.6
 #pregunta 2.7
+
+
+
+
